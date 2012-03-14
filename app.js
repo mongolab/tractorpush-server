@@ -9,7 +9,7 @@
 // Copyright 2012 ObjectLabs Corp.
 // isCapped() & intervalEach() is also Copyright 2009-2010 Christian Amor Kvalheim
 // see package.json for attributions
-// ObjectLabs is the maker of MongoLab 
+// ObjectLabs is the maker of MongoLab.com, a cloud, hosted MongoDB service
 //
 
 
@@ -26,9 +26,8 @@
    // limitations under the Apache License.
 
 //
-// NB: I don't provide a durable connection to mongodb that retries
-// on failures with backoff. Instead I'm relying on a PaaS's durable
-// restarts. 
+// NB: I don't provide a durable connection to mongodb that retries on
+// failures. Instead I'm relying on a PaaS's durable restarts.
 //
 
 var fs = require('fs'), 
