@@ -1,5 +1,4 @@
-# Tractor Push
-#A Real-time Demo with Ruby, Node.js, Socket.io and MongoDB on Heroku Cedar
+# Tractor Push: A Real-time Demo with Ruby, Node.js, Socket.io and MongoDB on Heroku Cedar
 
 
 Learn how to use three rising infrastructure technologies that put
@@ -88,9 +87,6 @@ See: (TODO: URL) for detailed instructions on how to run the demo, but succintly
 * Run tractorpush-writer-ruby to insert files
 * Run 'npm install' Run tractorpush-server (this project): 'node app.js'
 * Point your browser to http://localhost:2000 and enjoy
-
-# Inserter Ruby
-The insertion code is at https://github.com/mongolab/tractorpush-writer-ruby
 
 # Server REQUIRES 
 
