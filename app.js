@@ -13,17 +13,17 @@
 //
 
 
-   // Licensed under the Apache License, Version 2.0 (the "Apache License");
-   // you may not use this file except in compliance with the Apache License.
-   // You may obtain a copy of the License at
-   //
-   //     http://www.apache.org/licenses/LICENSE-2.0
-   //
-   // Unless required by applicable law or agreed to in writing, software
-   // distributed under the Apache License is distributed on an "AS IS" BASIS,
-   // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   // See the Apache License for the specific language governing permissions and
-   // limitations under the Apache License.
+// Licensed under the Apache License, Version 2.0 (the "Apache License");
+// you may not use this file except in compliance with the Apache License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the Apache License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the Apache License for the specific language governing permissions and
+// limitations under the Apache License.
 
 //
 // NB: I don't provide a durable connection to mongodb that retries on
@@ -104,17 +104,17 @@ function startIOServer (collection) {
 	io.set("log level", 2);
     });
     io.sockets.on('connection', function (socket) {
-	queriedSend(socket, collection);
+	readAndSend(socket, collection);
     });
 };
 
 //
-// Find and send data to socket.
+// Read and send data to socket.
 // The real work is done here upon receiving a new client connection.
 // Queries the database twice and starts sending two types of messages to the client.
 // (known bug: if there are no documents in the collection, it doesn't work.)
 //
-function queriedSend (socket, collection) {
+function readAndSend (socket, collection) {
     collection.find({}, {'tailable': 1, 'sort': [['$natural', 1]]}, function(err, cursor) {
 	cursor.intervalEach(300, function(err, item) { // intervalEach() is a duck-punched version of each() that waits N milliseconds between each iteration.
 	    if(item != null) {
