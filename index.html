@@ -32,7 +32,7 @@
       <meta content='text/html;charset=utf-8'/>
       <link href='http://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css' />
       <style>
-	    body { background-color: #fff; font-family: 'Arimo', helvetica neue, arial, sans-serif; margin-left: 15px; color: #000}
+	    body { background-color: #ddd; font-family: 'Arimo', helvetica neue, arial, sans-serif; margin-left: 15px; color: #000}
 	    h1   { font-size: 50px; margin: 5px; float: right; text-align: right; color: #d33 }
 	    h2   { font-size: 40px; margin: 5px; float: right; text-align: right }
 	    h3   { font-size: 35px; margin-top: 20px; margin-left: 10px; text-align: center}
@@ -50,7 +50,7 @@
 
 
 	  </style>
-	  <title>Tractor Push: MongoDB Tailable Cursor + socket.io demo</title>
+	  <title>Tractor Push: MongoDB Tailable Cursor + Socket.IO demo</title>
         <script src='http://ajax.googleapis.com/ajax/libs/dojo/1.7.1/dojo/dojo.js'
             data-dojo-config='async: true'>
         </script>
@@ -91,18 +91,13 @@
         </script>
     </head>
     <body>
-      <!-- Background -->
-      <div class="backimg">
-	<img class="fillscreen" alt='Tractor Engine, Copyright 2011 Ben Wen CC
-				     BY-SA 3.0' src="http://jux-user-files-prod.s3.amazonaws.com/2012/01/27/18/27/18/956/IMG_2484.JPG"/> 
-      </div>
       <div class="titlebox">
 	<h1>Tractor Push</h1>
 	<h2> 
 	MongoDB <br/>
 	Tailable <br/> 
 	Cursor and <br/> 
-	socket.io Demo <br/>
+	Socket.IO Demo <br/>
 	from MongoLab 
       </h2>
 	</div>
@@ -132,8 +127,8 @@
       </div>
 
       <div class='descript'>
-      This is a demonstration of a socket.io client that accepts two message streams from a server asynchronously.  The left box updates on the arrival of the 'all messages' stream: simple, array, or complex.  The right box updates from a message stream of only 'complex' type.  The streams are independent but draw from the same source.  
-<p> The server is node.js running socket.io.  It reads from a capped MongoDB database with a tailable cursor.  A secondary set of servers (it happens to be in Ruby) originally wrote to the database. 
+      This is a demonstration of a Socket.IO client that accepts two message streams from a server asynchronously.  The left box updates on the arrival of the 'all messages' stream: simple, array, or complex.  The right box updates from a message stream of only 'complex' type.  The streams are independent but draw from the same source.  
+<p> The server is node.js running Socket.IO.  It reads from a capped MongoDB database with a tailable cursor.  A secondary set of servers (it happens to be in Ruby) originally wrote to the database. 
 <p> Note: Sequence numbers may not be unique.
 <p> The node.js and Ruby components are running on Heroku's Celedon Cedar stack.  The MongoDB database is hosted at MongoLab.  https://github.com/mongolab/tractorpush-server for more information.
 <p> Original Demo: 2012 March
