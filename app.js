@@ -6,14 +6,42 @@
 //
 //
 //
-// Copyright 2012 ObjectLabs Corp.
-// isCapped() & intervalEach() is also Copyright 2009-2010 Christian Amor Kvalheim
-// see package.json for attributions
-// ObjectLabs is the maker of MongoLab.com, a cloud, hosted MongoDB service
+
 //
+// ObjectLabs is the maker of MongoLab.com a cloud, hosted MongoDb
+// service
 
+// Copyright 2012 ObjectLabs Corp.  
 
-// Licensed under the Apache License, Version 2.0 (the "Apache License");
+// MIT License, except isCapped() & intervalEach()
+
+// Permission is hereby granted, free of charge, to any person
+// obtaining a copy of this software and associated documentation files
+// (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge,
+// publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so,
+// subject to the following conditions:  
+
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software. 
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+// BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE. 
+
+//
+// isCapped() & intervalEach() is also Copyright 2009-2010 Christian Amor Kvalheim
+// see package.json for attributions.  
+//
+//
+// isCapped() and intervalEach() are
+// licensed under the Apache License, Version 2.0 (the "Apache License");
 // you may not use this file except in compliance with the Apache License.
 // You may obtain a copy of the License at
 //
@@ -24,6 +52,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the Apache License for the specific language governing permissions and
 // limitations under the Apache License.
+//
 
 //
 // NB: I don't provide a durable connection to mongodb that retries on
