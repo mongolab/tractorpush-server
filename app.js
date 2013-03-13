@@ -59,12 +59,13 @@
 // failures. Instead I'm relying on a PaaS's durable restarts.
 //
 
-var fs = require('fs'), 
-url = require('url'),
-emitter = require('events').EventEmitter,
-assert = require('assert'),
+var fs = require("fs"), 
+url = require("url"),
+emitter = require("events").EventEmitter,
+assert = require("assert"),
 
-mongo = require('mongodb'),
+mongo = require("mongodb"),
+config = require("./config").config,
 QueryCommand = mongo.QueryCommand,
 Cursor = mongo.Cursor,
 Collection = mongo.Collection;
@@ -76,19 +77,19 @@ var mongoUrl = url.parse (uristring);
 //
 // Start http server and bind the socket.io service
 //
-var app = require('http').createServer(handler), // handler defined below
-io = require('socket.io').listen(app);
+var app = require("http").createServer(handler), // handler defined below
+io = require("socket.io").listen(app);
 
 theport = process.env.PORT || 2000;
 app.listen(theport);
 console.log ("http server on port: " + theport);
 
 function handler (req, res) {
-  fs.readFile(__dirname + '/index.html',
+  fs.readFile(__dirname + "/index.html",
   function (err, data) {
     if (err) {
       res.writeHead(500);
-      return res.end('Error loading index.html');
+      return res.end("Error loading index.html");
     }
     res.writeHead(200);
     res.end(data);
@@ -118,7 +119,7 @@ mongo.Db.connect (uristring, function (err, db) {
 });
 
 //
-// Bind send action to 'connection' event
+// Bind send action to "connection" event
 //
 function startIOServer (collection) {
     console.log("Starting ...");
@@ -128,11 +129,11 @@ function startIOServer (collection) {
     // Modify io.configure call to allow other transports.
 
     io.configure(function () { 
-    	io.set("transports", ["xhr-polling"]); 
+    	io.set("transports", config[platform].transports); // Set config in ./config.js
     	io.set("polling duration", 10); 
 	io.set("log level", 2);
     });
-    io.sockets.on('connection', function (socket) {
+    io.sockets.on("connection", function (socket) {
 	readAndSend(socket, collection);
     });
 };
@@ -144,17 +145,17 @@ function startIOServer (collection) {
 // (known bug: if there are no documents in the collection, it doesn't work.)
 //
 function readAndSend (socket, collection) {
-    collection.find({}, {'tailable': 1, 'sort': [['$natural', 1]]}, function(err, cursor) {
+    collection.find({}, {"tailable": 1, "sort": [["$natural", 1]]}, function(err, cursor) {
 	cursor.intervalEach(300, function(err, item) { // intervalEach() is a duck-punched version of each() that waits N milliseconds between each iteration.
 	    if(item != null) {
-		socket.emit('all', item); // sends to clients subscribed to type 'all'
+		socket.emit("all", item); // sends to clients subscribed to type "all"
 	    }
 	});
     });
-    collection.find({'messagetype':'complex'}, {'tailable': 1, 'sort': [['$natural', 1]]}, function(err, cursor) {
+    collection.find({"messagetype":"complex"}, {"tailable": 1, "sort": [["$natural", 1]]}, function(err, cursor) {
 	cursor.intervalEach(900, function(err, item) {
 	    if(item != null) {
-		socket.emit('complex', item); // sends to clients subscribe to type 'complex'
+		socket.emit("complex", item); // sends to clients subscribe to type "complex"
 	    }
 	});
     });
@@ -184,11 +185,11 @@ Collection.prototype.isCapped = function isCapped(callback) {
 
 
 // Duck-punching mongodb driver Cursor.each.  This now takes an interval that waits 
-// 'interval' milliseconds before it makes the next object request... 
+// "interval" milliseconds before it makes the next object request... 
 Cursor.prototype.intervalEach = function(interval, callback) {
     var self = this;
     if (!callback) {
-	throw new Error('callback is mandatory');
+	throw new Error("callback is mandatory");
     }
 
     if(this.state != Cursor.CLOSED) {
