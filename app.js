@@ -13,7 +13,7 @@
 
 // Copyright 2012 ObjectLabs Corp.  
 
-// MIT License, except isCapped() & intervalEach()
+// MIT License, except intervalEach()
 
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation files
@@ -36,14 +36,14 @@
 // SOFTWARE. 
 
 //
-// isCapped() & intervalEach() is also Copyright 2009-2010 Christian Amor Kvalheim
+// intervalEach() is also Copyright 2009-2010 Christian Amor Kvalheim
 // see package.json for attributions.  
 //
 //
-// isCapped() and intervalEach() are
-// licensed under the Apache License, Version 2.0 (the "Apache License");
-// you may not use this file except in compliance with the Apache License.
-// You may obtain a copy of the License at
+// intervalEach() is licensed under the Apache License, Version 2.0
+// (the "Apache License"); you may not use this file except in
+// compliance with the Apache License.  You may obtain a copy of the
+// License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -56,7 +56,8 @@
 
 //
 // NB: I don't provide a durable connection to mongodb that retries on
-// failures. Instead I'm relying on a PaaS's durable restarts.
+// failures. Instead I'm relying on a PaaS's durable restarts, ok
+// really it's a TODO.
 //
 
 var fs = require("fs"), 
@@ -109,7 +110,7 @@ mongo.Db.connect (uristring, function (err, db) {
 		process.exit(1);
 	    }
 	    if (!capped) {
-		console.log (collection + " is not a capped collection. Aborting.  Please use a capped collection for tailable cursors.");
+		console.log (collection.collectionName + " is not a capped collection. Aborting.  Please use a capped collection for tailable cursors.");
 		process.exit(2);
 	    }
 	    console.log ("Success connecting to " + mongoUrl.protocol + "//" + mongoUrl.hostname + ".");
@@ -161,28 +162,6 @@ function readAndSend (socket, collection) {
     });
 };
 	
-//
-// Monkey patching mongodb driver 0.9.9-3
-//
-/**
- * Returns if the collection is a capped collection
- *
- * @param {Function} callback returns if collection is capped.
- * @return {null}
- * @api public
- */
-Collection.prototype.isCapped = function isCapped(callback) {
-  this.options(function(err, document) {
-    if(err != null) {
-      callback(err);
-    } else if (document == null) { // SEEMS to be a bug?  Just hacke it: by testing document==null and punting back an error.
-	callback ("Collection.isCapped options document is null.");
-    } else {
-      callback(null, document.capped);
-    }
-  });
-};
-
 
 // Duck-punching mongodb driver Cursor.each.  This now takes an interval that waits 
 // "interval" milliseconds before it makes the next object request... 
