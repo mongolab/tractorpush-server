@@ -33,8 +33,9 @@
 
        by Ben Wen, ObjectLabs
 
-       ObjectLabs is the maker of MongoLab.com a cloud, hosted MongoDb
-       service
+       ObjectLabs is the maker of MongoLab.com a cloud MongoDb-as-a-Service
+       provider.
+
 -->
 <html xmlns='http://www.w3.org/1999/xhtml'>
     <head>
@@ -142,13 +143,20 @@
       </div>
 
       <div class='descript'>
-      This is a demonstration of a Socket.IO client that accepts two message streams from a server asynchronously.  The left box updates on the arrival of the 'all messages' stream: simple, array, or complex.  The right box updates from a message stream of only 'complex' type.  The streams are independent but draw from the same source.  
-<p> The server is node.js running Socket.IO.  It reads from a capped MongoDB database with a tailable cursor.  A secondary set of servers (it happens to be in Ruby) originally wrote to the database. 
-<p> Note: Sequence numbers may not be unique.
-<p> The node.js and Ruby components are running on Heroku's Celedon Cedar stack.  The MongoDB database is hosted at MongoLab.  https://github.com/mongolab/tractorpush-server for more information.
-<p> Original Demo: 2012 March
+      This demonstration of a Socket.IO client accepts two message streams from a server asynchronously.  The left box is updated on the arrival of the 'all messages' stream.  Messages can be one of three types: simple, array, or complex.  The right box is updated from a message stream of only the 'complex' type.  The streams are independent but draw from the same source.
+	
+<p> The server is running Node.js and uses Socket.IO.  It reads from a MongoDB capped collection using a tailable cursor.  The tailable cursor allows the server to pick up changes to the database dynamically.  A separate writer process writes to the database.
+	
+<p> The server components have been tested on Heroku's Celedon Cedar stack and Joyent's Cloud.  The MongoDB database is hosted at MongoLab.  Code at<br/>
+	  <a href="https://github.com/mongolab/tractorpush-server">https://github.com/mongolab/tractorpush-server</a>,<br/>
+	  <a href="https://github.com/mongolab/tractorpush-writer-ruby">https://github.com/mongolab/tractorpush-writer-ruby</a>, and<br/>
+	  <a href="https://github.com/mongolab/tractorpush-writer-node">https://github.com/mongolab/tractorpush-writer-node</a>.<br/>
+
+	
+	
+<p> Original Demo: 2012 March.  Updated 2013 March.
 <p> 
-	Copyright 2012 ObjectLabs Corp.  
+	Copyright 2012, 2013 ObjectLabs Corp.  
 	
 <p>	MIT License
 
