@@ -2,7 +2,7 @@
     "name": "TractorPush",
     "description" : "A Node.js, socket.io, and MongoDB tailed cursor push demo.",
     "dependencies": {
-	"mongodb": "1.2.3",
+	"mongodb": "1.2.13",
 	"socket.io" : "0.9.13" },
     "engines" : { 
 	"node" : ">=0.6.10"},
