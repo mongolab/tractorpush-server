@@ -5,7 +5,7 @@
 	"mongodb": "1.2.13",
 	"socket.io" : "0.9.13" },
     "engines" : { 
-	"node" : ">=0.6.10"},
+	"node" : "0.8.11"},
     "keywords" : ["mongodb", "mongo", "mongolab", "node.js", "node", "socket.io", "WebSockets"],
     "version": "0.9.1",
     "author" : "Ben Wen",
