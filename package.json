@@ -2,12 +2,13 @@
     "name": "TractorPush",
     "description" : "A Node.js, socket.io, and MongoDB tailed cursor push demo.",
     "dependencies": {
-	"mongodb": "1.2.13",
-	"socket.io" : "0.9.13" },
+	"mongodb": "1.4.10",
+	"socket.io" : "1.1.0" },
     "engines" : { 
-	"node" : "0.8.11"},
+	"node" : "0.10.31",
+        "npm" : "1.4.25" },
     "keywords" : ["mongodb", "mongo", "mongolab", "node.js", "node", "socket.io", "WebSockets"],
-    "version": "0.9.1",
+    "version": "0.10.1",
     "author" : "Ben Wen",
     "contributors" :  {"mongodb - node.js driver" : "Christian Amor Kvalheim <christkv@gmail.com>, et. al.",
 		       "numerous valuable additions" : "Ryan Daigle, Heroku"}

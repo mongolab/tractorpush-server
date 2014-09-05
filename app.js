@@ -11,7 +11,7 @@
 // ObjectLabs is the maker of MongoLab.com a cloud, hosted MongoDb
 // service
 
-// Copyright 2012 ObjectLabs Corp.  
+// Copyright 2014 ObjectLabs Corp.  
 
 // MIT License, except intervalEach()
 
@@ -66,13 +66,10 @@ emitter = require("events").EventEmitter,
 assert = require("assert"),
 
 mongo = require("mongodb"),
-config = require("./config").config,
-QueryCommand = mongo.QueryCommand,
-Cursor = mongo.Cursor,
-Collection = mongo.Collection;
+Cursor = mongo.Cursor;
 
 // Heroku-style environment variables
-var uristring = process.env.MONGOLAB_URI || "mongodb://localhost/testdatabase" 
+var uristring = process.env.MONGOLAB_URI || "mongodb://localhost/testdatabase"; 
 var mongoUrl = url.parse (uristring);
 
 //
@@ -101,7 +98,7 @@ function handler (req, res) {
 // Open mongo database connection
 // A capped collection is needed to use tailable cursors
 //
-mongo.Db.connect (uristring, function (err, db) { 
+mongo.MongoClient.connect (uristring, function (err, db) { 
     console.log ("Attempting connection to " + mongoUrl.protocol + "//" + mongoUrl.hostname + " (complete URL supressed).");
     db.collection ("messages", function (err, collection) {
 	collection.isCapped(function (err, capped) { 
@@ -125,15 +122,6 @@ mongo.Db.connect (uristring, function (err, db) {
 function startIOServer (collection) {
     console.log("Starting ...");
 
-    // Many hosted environments do not support all transport forms currently, (specifically WebSockets).
-    // So we force a relatively safe xhr-polling transport.
-    // Modify io.configure call to allow other transports.
-
-    io.configure(function () { 
-    	io.set("transports", config[platform].transports); // Set config in ./config.js
-    	io.set("polling duration", 10); 
-	io.set("log level", 2);
-    });
     io.sockets.on("connection", function (socket) {
 	readAndSend(socket, collection);
     });
